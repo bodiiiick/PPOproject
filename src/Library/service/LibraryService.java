@@ -16,7 +16,6 @@ public class LibraryService {
         this.users = new ArrayList<>();
     }
 
-    // ------------------- ДОДАВАННЯ КНИГ ТА КОРИСТУВАЧІВ -------------------
 
     public void addBook(Book book) {
         books.add(book);
@@ -26,7 +25,6 @@ public class LibraryService {
         users.add(user);
     }
 
-    // ------------------- ОПЕРАЦІЇ ДЛЯ АДМІНІСТРАТОРА -------------------
 
     public void removeBook(Book book) {
         books.removeIf(b ->
@@ -52,7 +50,6 @@ public class LibraryService {
         return null;
     }
 
-    // ------------------- ОПЕРАЦІЇ З КНИГАМИ (USER BY USERNAME) -------------------
 
     public boolean borrowBook(String username, String bookTitle) {
         User user = findUser(username);
@@ -94,7 +91,6 @@ public class LibraryService {
         return userBooks;
     }
 
-    // ------------------- ОПЕРАЦІЇ З КНИГАМИ (USER BY OBJECT) -------------------
 
     public boolean borrowBook(User user, Book book) {
         for (Book b : books) {
