@@ -7,13 +7,13 @@ public class User {
     private String username;
     private String password;
     private Role role;
-    private List<String> borowedBooks;
+    private List<String> borrowedBooks;
 
-    public User(String username, String password, Role role, List<String> borowedBooks) {
+    public User(String username, String password, Role role, List<String> borrowedBooks) {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.borowedBooks = new ArrayList<>();
+        this.borrowedBooks = borrowedBooks != null ? borrowedBooks : new ArrayList<>();
     }
 
     public String getUsername() {
@@ -29,14 +29,14 @@ public class User {
     }
 
     public List<String> getBorowedBooks() {
-        return borowedBooks;
+        return borrowedBooks;
     }
 
     public void borrowBook(String bookTitle){
-        borowedBooks.add(bookTitle);
+        borrowedBooks.add(bookTitle);
     }
 
     public void returnBook(String bookTitle){
-        borowedBooks.remove(bookTitle);
+        borrowedBooks.remove(bookTitle);
     }
 }
