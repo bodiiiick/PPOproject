@@ -1,23 +1,34 @@
 package Library.service;
 
-import Library.model.Role;
 import Library.model.User;
-
-import java.util.ArrayList;
+import Library.model.Role;
 
 public class AuthService {
-    public User login(String username , String password){
-        if (username.equals("admin") && password.equals("admin")){
-            return new User("admin", "admin", Role.ADMIN, new ArrayList<>());
-        }
-        if (username.equals("user") && password.equals("user")) {
-            return new User("user", "user", Role.USER, new ArrayList<>());
-        }
+    private final LibraryService libraryService;
+    private User currentUser;
 
+    public AuthService(LibraryService libraryService) {
+        this.libraryService = libraryService;
+    }
+
+    public User login(String username, String password) {
+        User user = libraryService.findUser(username);
+        if (user != null && user.getPassword().equals(password)) {
+            currentUser = user;
+            return user;
+        }
         return null;
     }
 
-//    public void logout(){
-//
-//    }
+    public void logout() {
+        currentUser = null;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public boolean isAdmin() {
+        return currentUser != null && currentUser.getRole() == Role.ADMIN;
+    }
 }
