@@ -31,4 +31,8 @@ public class AuthService {
     public boolean isAdmin() {
         return currentUser != null && currentUser.getRole() == Role.ADMIN;
     }
+
+    public LibraryService getLibraryService() {
+        return libraryService;
+    }
 }
