@@ -295,7 +295,6 @@ public class AdminDashboard extends JFrame {
                 User user = (User) value;
                 setText(user.getUsername() + " - " + user.getRole());
 
-                // Різний колір для адмінів
                 if (user.getRole() == Role.ADMIN) {
                     setForeground(new Color(0, 100, 0)); // Темно-зелений
                     setFont(getFont().deriveFont(Font.BOLD));
