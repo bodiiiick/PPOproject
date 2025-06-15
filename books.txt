@@ -1,0 +1,5 @@
+Gone Girl|Gillian Flynn|true|MysteryAddict
+The Girl with the Dragon Tattoo|true|null|
+And Then There Were None|Agatha Christie|true|QueenOfCrime
+The Silent Patient|true|null|
+The Da Vinci Code|Dan Brown|true|Symbologist

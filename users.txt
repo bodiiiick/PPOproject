@@ -1,0 +1,3 @@
+admin|admin123|ADMIN|
+Ivan|Ivan123|USER|
+Bohdan|Bohdan123|USER|
