@@ -14,15 +14,27 @@ public class LibraryService {
         books.add(book);
     }
 
-    public void removeBook(Book book) {
-        books.removeIf(b ->
-                Objects.equals(b.getTitle(), book.getTitle()) &&
-                        Objects.equals(b.getAuthor(), book.getAuthor())
-        );
+    public boolean removeBook(Book book) {
+        if (book.isBorrowed()) {
+            User borrower = findUser(book.getBorrowedBy());
+            if (borrower != null) {
+                borrower.returnBook(book.getTitle());
+            }
+            book.returnBook();
+        }
+        return books.remove(book);
     }
 
     public void addUser(User user) {
         users.add(user);
+    }
+
+    public boolean removeUser(User user) {
+        List<String> borrowedBooks = new ArrayList<>(user.getBorowedBooks());
+        for (String bookTitle : borrowedBooks) {
+            returnBook(user, bookTitle);
+        }
+        return users.remove(user);
     }
 
     public List<Book> getAllBooks() {

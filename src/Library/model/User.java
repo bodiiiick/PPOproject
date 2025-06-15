@@ -36,7 +36,7 @@ public class User {
         borrowedBooks.add(bookTitle);
     }
 
-    public void returnBook(String bookTitle){
-        borrowedBooks.remove(bookTitle);
+    public void returnBook(String bookTitle) {
+        borrowedBooks.removeIf(title -> title.equals(bookTitle));
     }
 }

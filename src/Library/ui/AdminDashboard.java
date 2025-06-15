@@ -191,18 +191,12 @@ public class AdminDashboard extends JFrame {
             return;
         }
 
-        int result = JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure you want to delete user: " + selectedUser.getUsername() + "?",
-                "Confirm Deletion",
-                JOptionPane.YES_NO_OPTION
-        );
-
-        if (result == JOptionPane.YES_OPTION) {
-            libraryService.getAllUsers().remove(selectedUser);
+        if (libraryService.removeUser(selectedUser)) {
             updateLists();
             userDetailsArea.setText("");
             JOptionPane.showMessageDialog(this, "User removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to remove user", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -243,18 +237,25 @@ public class AdminDashboard extends JFrame {
             JOptionPane.showMessageDialog(this, "Please select a book", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (selectedBook.isBorrowed()) {
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "This book is borrowed by " + selectedBook.getBorrowedBy() +
+                            ". Removing it will return the book. Proceed?",
+                    "Confirm Removal",
+                    JOptionPane.YES_NO_OPTION
+            );
 
-        int result = JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure you want to delete book: " + selectedBook.getTitle() + "?",
-                "Confirm Deletion",
-                JOptionPane.YES_NO_OPTION
-        );
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+        }
 
-        if (result == JOptionPane.YES_OPTION) {
-            libraryService.getAllBooks().remove(selectedBook);
+        if (libraryService.removeBook(selectedBook)) {
             updateLists();
             JOptionPane.showMessageDialog(this, "Book removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to remove book", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
