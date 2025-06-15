@@ -24,8 +24,8 @@ public class Main {
                 new LoginForm(authService);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,
-                        "Помилка запуску програми: " + e.getMessage(),
-                        "Критична помилка", JOptionPane.ERROR_MESSAGE);
+                        "Error launching the program: " + e.getMessage(),
+                        "Critical error", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
