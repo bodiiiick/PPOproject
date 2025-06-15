@@ -39,4 +39,9 @@ public class User {
     public void returnBook(String bookTitle) {
         borrowedBooks.removeIf(title -> title.equals(bookTitle));
     }
+
+    @Override
+    public String toString() {
+        return username + " (" + role + ")";
+    }
 }

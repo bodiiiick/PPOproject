@@ -38,6 +38,7 @@ public class AdminDashboard extends JFrame {
         usersList = new JList<>(usersModel);
         booksList = new JList<>(booksModel);
         booksList.setCellRenderer(new BookListRenderer());
+        usersList.setCellRenderer(new UserListRenderer());
 
         userDetailsArea = new JTextArea();
         userDetailsArea.setEditable(false);
@@ -279,6 +280,27 @@ public class AdminDashboard extends JFrame {
                     setForeground(Color.RED);
                 } else {
                     setForeground(Color.BLACK);
+                }
+            }
+            return this;
+        }
+    }
+
+    private static class UserListRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                                                      boolean isSelected, boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            if (value instanceof User) {
+                User user = (User) value;
+                setText(user.getUsername() + " - " + user.getRole());
+
+                // Різний колір для адмінів
+                if (user.getRole() == Role.ADMIN) {
+                    setForeground(new Color(0, 100, 0)); // Темно-зелений
+                    setFont(getFont().deriveFont(Font.BOLD));
+                } else {
+                    setForeground(Color.BLUE);
                 }
             }
             return this;
